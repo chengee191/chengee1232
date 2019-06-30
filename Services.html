@@ -1,0 +1,169 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Electircal project">
+	  <meta name="keywords" content="Singapore Polytechnic">
+  	<meta name="author" content="Cheng Ee">
+    <title>Cheng Ee projec | About</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1><span class="highlight"Cheng Ee</span>Projects</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li class="current"><a href="services.html">Projects</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+
+
+    <section id="main">
+      <div class="container">
+        <article id="main-col">
+          <h1 class="page-title">Automatic cooling fan</h1>
+          <ul id="services">
+            <li>
+              <h3>Items to get</h3>
+              <p>​This project is useful as Singapore is a humid and hot country. This allows the user to have a peaceful night of sleep. User does not have to wake up to turn off the fan when is too hot and switch off the fan when is too cold.
+<p>The skill level for the project is soldering and Arduino programming</p>
+<p>Things you need: </p>
+
+<p>1 Breadboard,</p>
+
+<p>1 2N2222 transistor</p>
+
+<p>1 220 Ohms Resistor</p>
+
+<p>1 1N4001 diode</p>
+
+<p>Jumper Wire</p>
+
+<p>1 D.C motor</p>
+
+<p>1.Speeeduino</p>
+<p>1.battery holder</p>
+<p>4 2A battery</p>
+<p>1 stripBoard</p>
+<p>1.Servor Moor</p>
+
+
+
+<p>Tools and software</p>
+<p>Soldering tools </p>
+<p>Arduino</p>
+            </li>
+            <li>
+              <h3>Build the schematic Diagram on breadboard</h3>
+              <img src="a.png" alt="ce" width="400px" length="350px">
+                <p>Follow the schematic Diagram given.</p>  <p>​Firstly connect vout of LM35 to A0 .Connect Gnd of LM35 to Gnd .COnnectt 5v to 5v of the arduino.</p>
+                <p>Secondly,Connect 220 ohm resistor to PWM pin 9 of Arduino.The resistor is connectetd to the Base of 2n222 transitor</p>
+                <p>Thirdly,The Emitter of the transitor is connected to the ground.The collector is connected to the diode.
+                </p>
+                <p>The fourth step is to connect the diode in paralle to the d.c motor.The d.c motor and diode is connected to 6v power supply.
+              </p>
+              <p>The fifth step , the power supply is connected to the ground</p>
+              <p>The sixth step is to connect PWM 3 pin to pin2 of the Servo.Pin 1 is connected to 5v and pin 3 is connected to the ground</p>
+    <h2>Explaination</h2>
+      <p>The diode is used to prevent flyback from the D.C motor, hence is connected parallel to the motor. <p> The D.C motor is connected to the PWM 9 of the Arduino. The transistor is used to control the D.C motor.</p>
+       <p>The LM 35 is connected to A0. A0 is a analog pin</p>
+            </li>
+            <li>
+              <h3>Coding</h3>
+              <p>Code to be used in arduino.</p>
+              <p>​#include <Servo.h></p>
+<p>float temp;</p>
+
+<p>int tempPin = A0; //arduino pin used for temperature sensor</p>
+
+<p>int tempMin = 25      </p>                                                                                                                 ; // the temperature to start the buzzer
+
+<p>int tempMax = 70;</p>
+
+<p>int fan = 9; // the pin where fan is connected</p>
+
+<p>int fanSpeed = 0;</p>
+<p>Servo myservo;  // create servo object to control a servo</p>
+
+
+<p>int pos = 0;    // variable to store the servo position</p>
+
+
+<p>void setup() {</p>
+
+<p>pinMode(fan, OUTPUT);s</p>
+
+<p>pinMode(tempPin, INPUT);</p>
+ <p>myservo.attach(3);</p>
+
+<p>Serial.begin(9600);</p>
+
+<p>}</p>
+
+<p>void loop() {</p>
+
+<p>temp = analogRead(tempPin);</p>
+
+<p>temp = (temp *5.0*100.0)/1024.0; //calculate the temperature in Celsius</p>
+
+<p>Serial.println(temp);</p>
+
+<p>delay(1000); // delay in between reads for stability</p>
+
+<p>if(temp < tempMin) { // if temp is lower than minimum temp</p>
+
+<p>fanSpeed = 0; // fan is not spinning</p>
+
+<p>digitalWrite(fan, LOW);</p>
+
+<p>}</p>
+
+<p>if((temp >= tempMin) && (temp <= tempMax)){ //if temperature is higher than the minimum range</p>
+
+
+<p>fanSpeed = map(temp, tempMin, tempMax, 32, 255); // the actual speed of fan</p>
+
+
+<p>analogWrite(fan, 255); // spin the fan at the fanSpeed speed</p>
+<p>for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees</p>
+  <p>  // in steps of 1 degree</p>
+  <p>  myservo.write(pos);              // tell servo to go to position in variable 'pos'</p>
+  <p>  delay(15);                       // waits 15ms for the servo to reach the position</p>
+  }</p>
+  <p>for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees</p>
+    <p>myservo.write(pos);              // tell servo to go to position in variable 'pos'</p>
+    <p>delay(15);                       // waits 15ms for the servo to reach the position</p>
+<p>  }
+
+<p>}
+
+}</p>
+
+            </li>
+            <li><h3>Final product</h3>
+            <p>Solder the components on to the stripboards using the soldeing tools.</p>
+            <p>The project is done :)</p>
+            <img src="final.jpeg" alt="ce" width="250px" length="350px">
+            </li>
+          </ul>
+        </article>
+
+
+
+      </div>
+    </section>
+
+    <footer>
+      <p>Cheng Ee, Copyright © 2017</p>
+    </footer>
+
+
+</body></html>
